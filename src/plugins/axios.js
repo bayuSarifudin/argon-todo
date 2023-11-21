@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { getCookies, delCookies } from './cookies'
 
-const baseUrl = import.meta.env.VITE_BASE_URL
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const baseApi = axios.create({
-	baseUrl
+	baseURL
 })
 
 baseApi.interceptors.request.use(

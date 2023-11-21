@@ -4,7 +4,7 @@ import Tables from '../views/Tables.vue'
 import Profile from '../views/Profile.vue'
 import Signup from '../views/Signup.vue'
 import Signin from '../views/Signin.vue'
-
+import { d$auth } from '@/store/auth'
 const routes = [
 	{
 		path: '/',
@@ -19,12 +19,14 @@ const routes = [
 	{
 		path: '/tables',
 		name: 'Tables',
-		component: Tables
+		component: Tables,
+		meta: { auth: true }
 	},
 	{
 		path: '/profile',
 		name: 'Profile',
-		component: Profile
+		component: Profile,
+		meta: { auth: true }
 	},
 	{
 		path: '/signin',
@@ -39,9 +41,25 @@ const routes = [
 ]
 
 const router = createRouter({
-	history: createWebHistory(import.meta.env.VITE_BASE_URL),
+	history: createWebHistory(import.meta.env.url),
 	routes,
 	linkActiveClass: 'active'
+})
+
+// navigation guards
+router.beforeEach((to, from, next) => {
+	// get auth state
+	const loggedIn = d$auth.isLoggedIn
+
+	console.log(loggedIn)
+	// if target route requires auth & no logged in user
+	// redirect to login
+	if (to.meta.auth && !loggedIn) {
+		next({ name: 'Signin' })
+	} else {
+		// else then proceeds
+		next()
+	}
 })
 
 export default router
