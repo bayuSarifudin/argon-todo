@@ -23,13 +23,6 @@
 			</li>
 			<li class="mt-3 nav-item">
 				<h6
-					v-if="this.$store.state.isRTL"
-					class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6"
-					:class="this.$store.state.isRTL ? 'me-4' : 'ms-2'">
-					صفحات المرافق
-				</h6>
-				<h6
-					v-else
 					class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6"
 					:class="this.$store.state.isRTL ? 'me-4' : 'ms-2'">
 					ACCOUNT PAGES
@@ -45,7 +38,7 @@
 					</template>
 				</sidenav-item>
 			</li>
-			<li class="nav-item">
+			<li v-if="!loggedIn" class="nav-item">
 				<sidenav-item
 					url="/signin"
 					:class="getRoute() === 'signin' ? 'active' : ''"
@@ -55,13 +48,20 @@
 					</template>
 				</sidenav-item>
 			</li>
-			<li class="nav-item">
+			<li v-if="!loggedIn" class="nav-item">
 				<sidenav-item
 					url="/signup"
 					:class="getRoute() === 'signup' ? 'active' : ''"
 					:navText="this.$store.state.isRTL ? 'اشتراك' : 'Sign Up'">
 					<template v-slot:icon>
 						<i class="ni ni-collection text-info text-sm opacity-10"></i>
+					</template>
+				</sidenav-item>
+			</li>
+			<li v-if="loggedIn" class="nav-item" @click="logout">
+				<sidenav-item url="/dashboard-default" :navText="'Logout'">
+					<template v-slot:icon>
+						<i class="ni ni-ungroup text-info text-sm opacity-10"></i>
 					</template>
 				</sidenav-item>
 			</li>
@@ -74,6 +74,9 @@
 <script>
 import SidenavItem from './SidenavItem.vue'
 import SidenavCard from './SidenavCard.vue'
+import { delCookies } from '@/plugins/cookies'
+
+import { d$auth } from '@/store/auth'
 
 export default {
 	name: 'SidenavList',
@@ -84,7 +87,8 @@ export default {
 		return {
 			title: 'Argon Dashboard 2',
 			controls: 'dashboardsExamples',
-			isActive: 'active'
+			isActive: 'active',
+			loggedIn: d$auth().isLoggedIn
 		}
 	},
 	components: {
@@ -95,6 +99,10 @@ export default {
 		getRoute() {
 			const routeArr = this.$route.path.split('/')
 			return routeArr[1]
+		},
+		logout() {
+			delCookies('CERT')
+			window.location.reload()
 		}
 	}
 }

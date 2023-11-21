@@ -116,14 +116,13 @@ export default {
 				password: this.password
 			}
 			try {
-				console.log(payload)
 				await d$auth().login(payload)
 
 				await d$auth().setUser()
 				// this.resetForm()
 
 				this.$router.push({
-					name: 'Dashboard'
+					name: 'Profile'
 				})
 			} catch (error) {
 				console.log(error)

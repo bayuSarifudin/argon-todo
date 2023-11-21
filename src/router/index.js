@@ -49,9 +49,8 @@ const router = createRouter({
 // navigation guards
 router.beforeEach((to, from, next) => {
 	// get auth state
-	const loggedIn = d$auth.isLoggedIn
+	const loggedIn = d$auth().isLoggedIn
 
-	console.log(loggedIn)
 	// if target route requires auth & no logged in user
 	// redirect to login
 	if (to.meta.auth && !loggedIn) {

@@ -48,8 +48,7 @@ export const d$auth = defineStore('auth', () => {
 
 	// getter
 	const g$user = computed(() => user.value)
-	const isLoggedIn = computed(() => !!user.value.id)
-	console.log(isLoggedIn)
+	const isLoggedIn = computed(() => (user.value.id ? true : false))
 
 	return {
 		// action
