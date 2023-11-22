@@ -47,13 +47,14 @@
 										</div>
 									</td>
 									<td>
-										<router-link :to="`/tables/${item.id}`">
-											<div class="d-flex px-2" style="cursor: pointer">
-												<div class="my-auto">
-													<h6 class="mb-0 text-sm">{{ item.title ?? 'title' }}</h6>
-												</div>
+										<div
+											@click="() => goDetail(item.id)"
+											class="d-flex px-2"
+											style="cursor: pointer; width: 100%; height: 100%">
+											<div class="my-auto">
+												<h6 class="mb-0 text-sm">{{ item.title ?? 'title' }}</h6>
 											</div>
-										</router-link>
+										</div>
 									</td>
 									<td>
 										<p class="text-sm font-weight-bold mb-0">
@@ -82,9 +83,18 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 defineProps({
 	listItems: {
 		type: Array
 	}
 })
+
+function goDetail(id) {
+	router.push({
+		path: `/tables/${id}`
+	})
+}
 </script>

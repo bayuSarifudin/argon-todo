@@ -52,6 +52,7 @@
 import ArgonInput from '@/components/ArgonInput.vue'
 import ArgonButton from '@/components/ArgonButton.vue'
 import ArgonTextarea from '@/components/ArgonTextarea.vue'
+// import ArgonCheckbox from '../components/ArgonCheckbox.vue'
 
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
@@ -81,7 +82,7 @@ const submitForm = async () => {
 		await todo.editTodo(id, input.value)
 
 		router.push({
-			name: 'Tables'
+			path: `/tables/${id}`
 		})
 	} catch (error) {
 		console.log(error)

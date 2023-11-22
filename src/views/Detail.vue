@@ -16,6 +16,7 @@
 					</div>
 
 					<div class="mt-4">
+						<button @click="back" type="button" class="btn btn-dark me-3">Go to Table</button>
 						<button @click="goEdit" type="button" class="btn btn-success me-3">Edit</button>
 						<button @click="removeTodo" type="button" class="btn btn-danger">Delete</button>
 					</div>
@@ -49,6 +50,12 @@ async function removeTodo() {
 function goEdit() {
 	router.push({
 		path: `/tables/${id}/edit`
+	})
+}
+
+function back() {
+	router.push({
+		name: 'Tables'
 	})
 }
 </script>
