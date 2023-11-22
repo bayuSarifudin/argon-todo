@@ -46,6 +46,15 @@ export const d$auth = defineStore('auth', () => {
 		}
 	}
 
+	const register = async (body) => {
+		try {
+			const { data } = await s$auth.register(body)
+			return data
+		} catch ({ error, message }) {
+			throw error
+		}
+	}
+
 	// getter
 	const g$user = computed(() => user.value)
 	const isLoggedIn = computed(() => (user.value.id ? true : false))
@@ -54,6 +63,7 @@ export const d$auth = defineStore('auth', () => {
 		// action
 		setUser,
 		login,
+		register,
 
 		// getter
 		g$user,
