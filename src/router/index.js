@@ -6,6 +6,7 @@ import Signup from '../views/Signup.vue'
 import Signin from '../views/Signin.vue'
 import CreateTodo from '../views/CreateTodo.vue'
 import Detail from '@/views/Detail.vue'
+import EditTodo from '@/views/EditTodo.vue'
 import { d$auth } from '@/store/auth'
 const routes = [
 	{
@@ -49,6 +50,11 @@ const routes = [
 		path: '/tables/:id',
 		name: 'Detail',
 		component: Detail
+	},
+	{
+		path: '/tables/:id/edit',
+		name: 'Edit',
+		component: EditTodo
 	}
 ]
 

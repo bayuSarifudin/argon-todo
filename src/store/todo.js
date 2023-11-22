@@ -9,7 +9,7 @@ export const useTodoStore = defineStore('todo', () => {
 
 	// getter
 	const getTodo = computed(() => todo.value)
-	const getDetail = (id) => computed(() => todo.value.find((el) => (el.id = id)))
+	const getDetail = (id) => computed(() => todo.value.find((el) => el.id == id))
 
 	// action
 	const init = async () => {
