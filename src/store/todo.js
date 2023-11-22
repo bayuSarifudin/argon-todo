@@ -23,7 +23,7 @@ export const useTodoStore = defineStore('todo', () => {
 
 	const addTodo = async (body) => {
 		try {
-			await s$todo.add(data)
+			await s$todo.add(body)
 			await init()
 		} catch ({ message, error }) {
 			throw message ?? error

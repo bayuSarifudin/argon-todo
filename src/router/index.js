@@ -4,6 +4,8 @@ import Tables from '../views/Tables.vue'
 import Profile from '../views/Profile.vue'
 import Signup from '../views/Signup.vue'
 import Signin from '../views/Signin.vue'
+import CreateTodo from '../views/CreateTodo.vue'
+import Detail from '@/views/Detail.vue'
 import { d$auth } from '@/store/auth'
 const routes = [
 	{
@@ -37,6 +39,16 @@ const routes = [
 		path: '/signup',
 		name: 'Signup',
 		component: Signup
+	},
+	{
+		path: '/create',
+		name: 'CreateTodo',
+		component: CreateTodo
+	},
+	{
+		path: '/tables/:id',
+		name: 'Detail',
+		component: Detail
 	}
 ]
 

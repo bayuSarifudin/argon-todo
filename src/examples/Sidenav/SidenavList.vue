@@ -75,6 +75,9 @@
 import SidenavItem from './SidenavItem.vue'
 import SidenavCard from './SidenavCard.vue'
 import { delCookies } from '@/plugins/cookies'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 import { d$auth } from '@/store/auth'
 
@@ -102,6 +105,9 @@ export default {
 		},
 		logout() {
 			delCookies('CERT')
+			this.$router.push({
+				name: 'Dashboard'
+			})
 			window.location.reload()
 		}
 	}
