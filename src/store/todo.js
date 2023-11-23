@@ -6,9 +6,11 @@ import * as s$todo from '@/services/todo'
 export const useTodoStore = defineStore('todo', () => {
 	// initial state
 	const todo = ref([])
+	const detailTodo = ref({})
 
 	// getter
 	const getTodo = computed(() => todo.value)
+	const getDetailTodo = computed(() => detailTodo.value)
 	const getDetail = (id) => computed(() => todo.value.find((el) => el.id == id))
 
 	// action
@@ -16,6 +18,15 @@ export const useTodoStore = defineStore('todo', () => {
 		try {
 			const { data } = await s$todo.list()
 			todo.value = data
+		} catch (error) {
+			throw error
+		}
+	}
+
+	const initDetail = async (id) => {
+		try {
+			const { data } = await s$todo.detail(id)
+			detailTodo.value = data
 		} catch (error) {
 			throw error
 		}
@@ -47,5 +58,5 @@ export const useTodoStore = defineStore('todo', () => {
 		}
 	}
 
-	return { getTodo, init, getDetail, addTodo, removeTodo, editTodo }
+	return { getTodo, init, getDetail, addTodo, removeTodo, editTodo, getDetailTodo, initDetail }
 })

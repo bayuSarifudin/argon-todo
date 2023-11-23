@@ -26,7 +26,9 @@
 								Completion
 							</th>
 							<th
-								class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2"></th>
+								class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
+								Action
+							</th>
 						</tr>
 					</thead>
 
@@ -67,9 +69,9 @@
 											{{ item.completed ? 'DONE' : 'NOT DONE' }}
 										</div>
 									</td>
-									<td class="align-middle">
-										<button class="btn btn-link text-secondary mb-0">
-											<i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>
+									<td class="align-middle action_tab">
+										<button @click="() => goDetail(item.id)" class="btn btn-success mb-0">
+											Detail
 										</button>
 									</td>
 								</tr>
@@ -98,3 +100,12 @@ function goDetail(id) {
 	})
 }
 </script>
+
+<style scoped>
+.action_tab {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+</style>
